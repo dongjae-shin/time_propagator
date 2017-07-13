@@ -1,0 +1,11 @@
+200 	# no. of grid
+50.	# length of grid [Bohr; length]
+0.01 	# time interval [in ARU; time]
+5.0	# total simulation time [in ARU; time]
+0.3 	# K0 factor
+15.0 	# center of wavepacket [Bohr; length]
+3 	# SIGMA [Bohr; length]
+2.0 	# potential width [Bohr; length]
+10.0 	# potential depth/height [Rydberg; energy]
+27.0 	# center of potential [Bohr; length]
+5	# output frequency

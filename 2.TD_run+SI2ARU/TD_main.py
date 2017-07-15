@@ -60,8 +60,8 @@ print '###Time-evolution start!'
 for i in range(1, NITER+1):
 	PHI = propa.update_CN(i, PHI, V, NSTEP, DT, H, eps)
 	if i%FREQ == 0:
-		print 'iteration = {0:10d}, time = {1:10.5f} \n'.\
-		format(i, i*DT)
+		print 'iteration = {0:10d}, time = {1:10.5f} fs\n'.\
+		format(i, i*DT*init.ARU_2_FS)
 		f = open("./output/{0:d}.WF".\
 			format(i), 'w')
 		for k in range(0,NSTEP+1):

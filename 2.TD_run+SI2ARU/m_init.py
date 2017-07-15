@@ -1,6 +1,8 @@
 import numpy as np
 import m_funcs as func
 
+ARU_2_FS = 4.8377687e-2
+
 def get_input():
 
 	K_E0 	= float(input('K_E0:\n')) # kinetic energy

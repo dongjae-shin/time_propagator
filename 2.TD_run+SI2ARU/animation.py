@@ -31,7 +31,8 @@ print filenames
 fig 	= plt.figure()
 ax 	= plt.axes(xlim=(X[0],X[NSTEP]), ylim=(0,0.1))
 line, 	= ax.plot([], [], lw=2)
-time_text = ax.text(0.05, 0.95,'',horizontalalignment='left',verticalalignment='top', transform=ax.transAxes)
+time_text = ax.text(0.05, 0.95,'',horizontalalignment='left',\
+	    verticalalignment='top', transform=ax.transAxes)
 plt.ylabel("|psi(x)|^2")
 plt.xlabel("x [Bohr]")
 
@@ -47,7 +48,7 @@ def update(i):
 	x, psi = np.loadtxt("{0}".\
 		format(filenames[i]), unpack=True)
 	line.set_data(x, psi)
-	time_text.set_text('time = {0:10.5f}'.format(i*DT))
+	time_text.set_text('time = {0:10.5f} fs'.format(i*DT*init.ARU_2_FS))
 	return line, time_text,
 
 length 	= int(len(filenames)) # because of FREQ, length < NITER

@@ -16,23 +16,6 @@ LEN, NSTEP, H, LEN_TIME, DT, NITER, DTH, VELOCITY,\
 FREQ, eps,\
 PHI, V, X = init.get_input()
 
-## SI unit into ARU
-#  Atomic Rydberg units (ARU) defined by:
-#  h_bar = 2*m_e = e^2/2 = 1, a_o = 4*pi*eps_o = 1
-#  spatial range is initially in ARU
-
-SIGMA	*= init.ANG_2_BOHR
-X0 	*= init.ANG_2_BOHR
-X  	*= init.ANG_2_BOHR
-H	*= init.ANG_2_BOHR
-
-V_xi 	*= init.ANG_2_BOHR
-V_xf 	*= init.ANG_2_BOHR
-V0 	*= init.EV_2_RYD
-
-DT 	*= init.FS_2_ARU 
-DTH     *= init.FS_2_ARU / init.ANG_2_BOHR**2	
-
 ## Initialization of wavefunction and external potentiali--------------
 PHI  = init.set_wavefunction(X, PHI, NSTEP, SIGMA, X0, H, VELOCITY)
 V    = init.set_ext_potential(X, V, NSTEP, V_xi, V_xf, V0)

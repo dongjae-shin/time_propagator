@@ -1,11 +1,6 @@
 import numpy as np
 import m_funcs as func
 
-ANG_2_BOHR = 1.0 / (5.2917725e-1)
-EV_2_RYD = 1.0 / 13.6
-FS_2_ARU = 1.0 / (1./20.)	
-
-
 def get_input():
 
 	K_E0 	= float(input('K_E0:\n')) # kinetic energy
@@ -33,7 +28,7 @@ def get_input():
 	# h_bar = 2*m_e = e^2/2 = 1, a_o = 4*pi*eps_o = 1
 	# spatial range is initially in ARU
 
-	VELOCITY = np.sqrt(4 * K_E0 * EV_2_RYD)
+	VELOCITY = np.sqrt(4 * K_E0)
 	DTH 	 = DT/H**2
 
 	## Getting other parameters

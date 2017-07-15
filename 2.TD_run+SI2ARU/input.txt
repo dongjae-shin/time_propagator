@@ -1,0 +1,12 @@
+0.5 	# K_E0 [eV] 
+50 	# X0 [Ang]
+1 	# SIGMA [Ang]
+60 	# V_xi [Ang]
+65 	# V_xf [Ang]
+0.7	# V0 [eV]
+100 	# LEN [Ang]
+200 	# NSTEP
+20 	# LEN_TIME [fs]
+0.02 	# DT [fs]
+1 	# FREQ
+0.1	# eps [%]; tolerance

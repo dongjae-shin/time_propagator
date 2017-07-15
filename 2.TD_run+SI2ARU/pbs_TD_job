@@ -1,0 +1,106 @@
+#! /bin/sh
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=1000:00:00
+#PBS -N TD_prop_test
+#PBS -q X2 
+#PBS -o ./xpbs.out
+#PBS -e ./xpbs.err
+#PBS -j oe
+##PBS -M mymail@kaist.ac.kr
+##PBS -m e
+
+export OMP_NUM_THREADS=1
+
+#exe
+#EXEBIN=$HOME/bin/QNANO.x_elec
+EXEBIN=./TD_main.py
+#MPIARG="-genv I_MPI_FABRICS=tmi"
+MPIARG=""
+
+#-----------------------
+# setup(DO NOT MODIFY)
+#-----------------------
+cd $PBS_O_WORKDIR
+
+rm -f host.done host.terminated host.removed
+
+NPROCS=`wc -l < $PBS_NODEFILE`
+jobid="td_propa_`date +%m%d_%H%M%S`"
+basdir="$PBS_O_WORKDIR"
+rundir="/scratch/works/`whoami`/${jobid}"
+infofl="host.run"
+
+hostname > ${infofl}
+echo "${rundir}" >> ${infofl}
+echo "* Run  directory: ${rundir}" >> ${infofl}
+echo "* Start time: `date`" >> ${infofl}
+
+# copy data to primary node
+
+if [ -d ${rundir} ]; then
+rm -rf ${rundir}/*
+else
+mkdir -p ${rundir}
+fi
+
+cp -r ${basdir}/*.py  ${rundir}/
+cp -r ${basdir}/input.txt  ${rundir}/
+
+# create scratch & copy data
+
+NNODES="1"
+NLIST=`sed -n 1p $PBS_NODEFILE`
+echo "$NLIST" > nodelist
+
+if [ $NPROCS -gt 1 ]
+then 
+  for (( p=2; p<=$NPROCS; p++ ))
+  do
+  PBSLST=`sed -n ${p}p $PBS_NODEFILE`
+  if [ $PBSLST != $NLIST ]; then
+    echo "$PBSLST" >> nodelist
+    ssh -Y $PBSLST "rm -rf ${rundir}; mkdir -p ${rundir}"
+    scp -r ${rundir}/*  $PBSLST:${rundir}/
+    NNODES=$(($NNODES+1))
+    NLIST=$PBSLST
+  fi
+  done
+fi
+touch stdout.txt
+
+#-----------------------
+# run siesta
+#-----------------------
+cd ${rundir}
+
+mkdir ./output
+mpirun -np $NPROCS ${MPIARG} $EXEBIN  < input.txt > stdout.txt
+
+cd ${basdir}
+
+# backup data
+#----------------
+cp -r ${rundir}/output  ${basdir}/
+cp -r ${rundir}/stdout.txt  ${basdir}/
+
+# remove scratch
+#----------------
+  for (( p=1; p<=$NNODES; p++ ))
+  do
+  PBSLST=`sed -n ${p}p nodelist`
+  ssh -Y $PBSLST "rm -rf ${rundir}"
+  done
+  echo "* Removed scratch: ${rundir}" >> ${infofl}
+
+#-----------------------
+EXSTR=`tail -1 stdout.txt | awk '{printf $2}'`
+if [ "$EXSTR" = "TERMINATED" ]; then
+  echo "* JOB TERMINATED: `date`" >> ${infofl}
+  mv ${infofl} host.terminated
+else
+  echo "* End   time: `date`" >> ${infofl}
+  mv ${infofl} host.done
+fi
+exit 0
+#eof.
+

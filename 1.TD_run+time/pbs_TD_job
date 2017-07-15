@@ -2,7 +2,7 @@
 #PBS -l nodes=1:ppn=1
 #PBS -l walltime=1000:00:00
 #PBS -N TD_prop_test
-#PBS -q X2 
+#PBS -q X1 
 #PBS -o ./xpbs.out
 #PBS -e ./xpbs.err
 #PBS -j oe

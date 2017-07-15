@@ -1,7 +1,0 @@
-1.Set the input.txt file as you want
-
-2.After the calculation is done, you can see the result as animation by typing,
-
-python animation < input.txt
-
-(To see the animation matplotlib should be installed in advance.)

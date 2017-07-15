@@ -26,12 +26,12 @@ filenames.sort()
 
 print filenames
 
-X *= init.ANG_2_BOHR
-
 ## Set up the initial figure
+## 170712 time_text was added.
 fig 	= plt.figure()
 ax 	= plt.axes(xlim=(X[0],X[NSTEP]), ylim=(0,0.1))
 line, 	= ax.plot([], [], lw=2)
+time_text = ax.text(0.05, 0.95,'',horizontalalignment='left',verticalalignment='top', transform=ax.transAxes)
 plt.ylabel("|psi(x)|^2")
 plt.xlabel("x [Bohr]")
 
@@ -39,14 +39,16 @@ plt.xlabel("x [Bohr]")
 def init():
 	x, V = np.loadtxt("V.PT", unpack=True)
 	line.set_data(x, V)
-	return line,
+	time_text.set_text('')
+	return line, time_text,
 ## Time evolution of wavefunction using output wavefunctions -----------
 def update(i):
 ## ---------------------------------------------------------------------
 	x, psi = np.loadtxt("{0}".\
 		format(filenames[i]), unpack=True)
 	line.set_data(x, psi)
-	return line,
+	time_text.set_text('time = {0:10.5f}'.format(i*DT))
+	return line, time_text,
 
 length 	= int(len(filenames)) # because of FREQ, length < NITER
 ani 	= animation.FuncAnimation(fig, update, init_func=init,\

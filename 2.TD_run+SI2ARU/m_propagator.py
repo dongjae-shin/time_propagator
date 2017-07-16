@@ -1,5 +1,6 @@
 import numpy as np
 import m_linalg as linalg
+import scipy.sparse.linalg as sp
 
 ## This module contains several time propagator functions ---------------------
 ## 1. Explicit method
@@ -21,7 +22,7 @@ def update_explicit(i, PHI, NSTEP, DT, DTH):
 	return PHI
 
 ## Time evolution of wavefunction using Crank-Nicolson method ----------
-def update_CN(i, PHI, V, NSTEP, DT, H, eps):
+def update_CN(i, PHI, V, NSTEP, DT, H, eps, solver=1):
 ## ---------------------------------------------------------------------
 	## Loop over time steps
 	## Initialization of imtermediate function(CHI), [A], {b}
@@ -46,8 +47,14 @@ def update_CN(i, PHI, V, NSTEP, DT, H, eps):
 			A[j,j] 		= -2. + 2*1j*H**2/DT - H**2*V[j+1]
 			A[j,j+1] 	= 1.
 			b[j] 		= 4*1j*H**2/DT * PHI[j+1]
-
-	CHI = linalg.gaussSeidel(A,b,eps) 
+	if   solver == 1:
+		CHI = sp.spsolve(A,b) 
+	elif solver == 2:
+		CHI = linalg.gaussSeidel(A,b,eps) 
+		# too slow!
+	else:
+		print "update_CN: inappropiate argument for solver!"
+		exit()
 
 	## Update the function using intermediate function, CHI
 	for IX in range(1,NSTEP):

@@ -5,6 +5,7 @@ import os
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import m_init as init
+from m_init import ARU_2_FS
 
 ## Getting input parameters--------------------------------------------
 K_E0, X0, SIGMA, V_xi, V_xf, V0,\
@@ -29,7 +30,7 @@ print filenames
 ## Set up the initial figure
 ## 170712 time_text was added.
 fig 	= plt.figure()
-ax 	= plt.axes(xlim=(X[0],X[NSTEP]), ylim=(0,0.1))
+ax 	= plt.axes(xlim=(X[0],X[NSTEP]))
 line, 	= ax.plot([], [], lw=2)
 time_text = ax.text(0.05, 0.95,'',horizontalalignment='left',\
 	    verticalalignment='top', transform=ax.transAxes)
@@ -48,7 +49,7 @@ def update(i):
 	x, psi = np.loadtxt("{0}".\
 		format(filenames[i]), unpack=True)
 	line.set_data(x, psi)
-	time_text.set_text('time = {0:10.5f} fs'.format(i*DT*init.ARU_2_FS))
+	time_text.set_text('time = {0:10.5f} fs'.format(i*DT*ARU_2_FS))
 	return line, time_text,
 
 length 	= int(len(filenames)) # because of FREQ, length < NITER

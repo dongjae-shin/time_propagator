@@ -21,7 +21,7 @@ def get_input():
 	LEN_TIME 	= float(input('Total time:\n')) #Total time
 	DT 		= float(input('Time interval:\n'))
 	if DT == 0.:
-		print 'error) time step should be positive real.'
+		print 'get_input: time step should be positive real!'
 		exit()
 	NITER 	= int(LEN_TIME/DT) # the no. of time iteration
 

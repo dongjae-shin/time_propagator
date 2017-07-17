@@ -1,12 +1,12 @@
-0.5 	# K_E0 [Rydberg] 
-35 	# X0 [Bohr]
-3 	# SIGMA [Bohr]
-55 	# V_xi [Bohr]
-60 	# V_xf [Bohr]
+0.69 	# K_E0 [Rydberg] 
+180 	# X0 [Bohr]
+20 	# SIGMA [Bohr]
+250 	# V_xi [Bohr]
+255 	# V_xf [Bohr]
 0.7	# V0 [Rydberg]
-100 	# LEN [Bohr]
-200 	# NSTEP
-20 	# LEN_TIME [ARU]
-0.02 	# DT [ARU]
+500 	# LEN [Bohr]
+500 	# NSTEP
+120 	# LEN_TIME [ARU]
+0.1 	# DT [ARU]
 1 	# FREQ
 0.1	# eps [%]; tolerance

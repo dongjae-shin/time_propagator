@@ -30,7 +30,8 @@ def get_input():
 	# h_bar = 2*m_e = e^2/2 = 1, a_o = 4*pi*eps_o = 1
 	# spatial range is initially in ARU
 
-	VELOCITY = np.sqrt(4 * K_E0)
+	K0	= np.sqrt(K_E0)
+	# VELOCITY = np.sqrt(4 * K_E0)
 	DTH 	 = DT/H**2
 
 	## Getting other parameters
@@ -44,18 +45,18 @@ def get_input():
 		X[IX] = IX * H
 
 	return K_E0, X0, SIGMA, V_xi, V_xf, V0,\
-	       LEN, NSTEP, H, LEN_TIME, DT, NITER, DTH, VELOCITY,\
+	       LEN, NSTEP, H, LEN_TIME, DT, NITER, DTH, K0,\
 	       FREQ, eps,\
 	       PHI, V, X
 
-def set_wavefunction(X, PHI, NSTEP, SIGMA, X0, H, VELOCITY):
+def set_wavefunction(X, PHI, NSTEP, SIGMA, X0, H, K0):
 	PHI[0]		= 0. + 0j
 	PHI[NSTEP] 	= 0. + 0j
 	NORM 		= 0.
 
 	## Initial shape of wavefunction
 	for IX in range(1,NSTEP): # loop from 1 to NSTEP-1
-		PHI[IX] = func.GWP(X[IX], SIGMA, X0, VELOCITY)
+		PHI[IX] = func.GWP(X[IX], SIGMA, X0, K0)
 		# Gussian wavepacket
 
 	## Normalization of wavefunction

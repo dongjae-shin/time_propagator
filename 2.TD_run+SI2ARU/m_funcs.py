@@ -9,8 +9,8 @@ def GAUSS(X, T):
 def EXACT(X, T):
 	value = GAUSS(X, T)-GAUSS(X-1., T)-GAUSS(X+1., T)
 	return value
-def GWP(X, SIGMA, X0, VELOCITY):
-	value = (2*np.pi*SIGMA**2)**(-0.25)*np.exp(1j*VELOCITY*(X-X0)/2)\
+def GWP(X, SIGMA, X0, K0):
+	value = (2*np.pi*SIGMA**2)**(-0.25)*np.exp(1j*K0*(X-X0))\
 		*np.exp(-(X-X0)**2/(2*SIGMA**2))
 	return value
 # Description of oscillations of the initial wavepacket-----------------

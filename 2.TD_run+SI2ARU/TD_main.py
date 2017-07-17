@@ -12,12 +12,12 @@ import m_propagator as propa
 
 ## Getting input parameters--------------------------------------------
 K_E0, X0, SIGMA, V_xi, V_xf, V0,\
-LEN, NSTEP, H, LEN_TIME, DT, NITER, DTH, VELOCITY,\
+LEN, NSTEP, H, LEN_TIME, DT, NITER, DTH, K0,\
 FREQ, eps,\
 PHI, V, X = init.get_input()
 
 ## Initialization of wavefunction and external potentiali--------------
-PHI  = init.set_wavefunction(X, PHI, NSTEP, SIGMA, X0, H, VELOCITY)
+PHI  = init.set_wavefunction(X, PHI, NSTEP, SIGMA, X0, H, K0)
 V    = init.set_ext_potential(X, V, NSTEP, V_xi, V_xf, V0)
 
 ## Print initial wavefunction(prob. density) and potential (stdout)----

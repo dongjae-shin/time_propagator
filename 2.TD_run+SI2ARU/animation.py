@@ -30,7 +30,7 @@ print filenames
 ## Set up the initial figure
 ## 170712 time_text was added.
 fig 	= plt.figure()
-ax 	= plt.axes(xlim=(X[0],X[NSTEP]))
+ax 	= plt.axes(xlim=(X[0],X[NSTEP]), ylim=(0,0.2))
 line, 	= ax.plot([], [], lw=2)
 time_text = ax.text(0.05, 0.95,'',horizontalalignment='left',\
 	    verticalalignment='top', transform=ax.transAxes)

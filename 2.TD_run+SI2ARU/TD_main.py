@@ -24,32 +24,32 @@ V    = init.set_ext_potential(X, V, NSTEP, V_xi, V_xf, V0)
 print '### Initial wavefunction:\n'
 print 'x [Bohr]   Re[psi]   Imag[psi]:\n'
 for k in range(0, NSTEP+1):
-	print '{0:10.5f}{1:10.5f}{2:10.5f}\n'.\
+	print '{0:12.7f}{1:12.7f}{2:12.7f}\n'.\
 	format(X[k], PHI[k].real, PHI[k].imag)
 
 print 'x [Bohr]   probability density:\n'
 for k in range(0, NSTEP+1):
-	print '{0:10.5f}{1:10.5f}\n'.\
+	print '{0:12.7f}{1:12.7f}\n'.\
 	format(X[k], np.absolute(PHI[k])**2)
 
 print '### External potential:\n'
 print 'x [Bohr]   V(x) [Ryd]:\n'
 for k in range(0, NSTEP+1):
-	print '{0:10.5f}{1:10.5f}\n'.\
+	print '{0:12.7f}{1:12.7f}\n'.\
 	format(X[k], V[k].real)
 
 ## Print initial wavefunction (output file)----------------------------
 f = open("./output/{0:d}.WF".\
 	format(0), 'w')
 for k in range(0,NSTEP+1):
-	f.write("{0:10.5f}{1:10.5f}\n".\
+	f.write("{0:12.7f}{1:12.7f}\n".\
 	format(X[k], np.absolute(PHI[k])**2))
 f.close()
 
 ## Print external portential ------------------------------------------
 f = open("./output/V.PT", 'w')
 for k in range(0,NSTEP+1):
-	f.write("{0:10.5f} {1:10.5f}\n".\
+	f.write("{0:12.7f} {1:12.7f}\n".\
 	format(X[k], V[k].real))
 f.close()
 
@@ -65,7 +65,7 @@ for i in range(1, NITER+1):
 		f = open("./output/{0:d}.WF".\
 			format(i), 'w')
 		for k in range(0,NSTEP+1):
-			f.write("{0:10.5f}{1:10.5f}\n".\
+			f.write("{0:12.7f}{1:12.7f}\n".\
 			format(X[k], np.absolute(PHI[k])**2))
 		f.close()
 
